@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+
+//pop doesn't need to be changed bc we are changing the object popped
+public class Testing {
+  boolean checkBST(Treenode n){
+      return checkBST(n, null, null);
+  }  
+  
+  boolean checkBST(Treenode n, Integer min, Integer max){
+      if (n == null){
+          return true;
+      }
+      if ((min != null && n.data <= min) || (max != null && n.data >max)){
+          return false;
+      }
+      if(!checkBST(n.left,min,n.data) || !checkBST(n.right,n.data,max)){
+          return false;
+      }
+      
+      return true;
+  }
+    
+    
+    public static void main(String[] args){
+        System.out.println("Hello");
+    }
+}
+
