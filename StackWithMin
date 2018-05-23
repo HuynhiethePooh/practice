@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.*;
+
+
+//pop doesn't need to be changed bc we are changing the object popped
+public class StackWithMin extends Stack<NodeWithMin> {
+    //change the push so that you grab the new minimum each time
+    public void push(int value){
+        int newMinimum = Math.min(value,min());
+        super.push(new NodeWithMin(value, newMinimum));
+    }
+    
+    public int min(){
+        if (this.isEmpty()){
+            return Integer.MAX_VALUE;
+        }
+        //this is O(1) bc the current min will be stored @ the top of the stack still
+        else {
+            return peek().min;
+        }
+    }
+    
+    public static void main(String[] args){
+        StackWithMin ex = new StackWithMin();
+        ex.push(10);
+        ex.push(4);
+        ex.push(3);
+        System.out.println("THIS IS THE FIRST MIN: " + ex.min());
+        ex.pop();
+        System.out.println("THIS IS THE SECOND MIN: " + ex.min());
+    }
+}
+
+class NodeWithMin {
+    public int value; 
+    public int min;
+    public NodeWithMin(int value, int min){
+        this.value = value;
+        this.min = min;
+    }
+}
